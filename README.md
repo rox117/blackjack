@@ -8,6 +8,7 @@ The player or dealer loses when their cards add up to a value greater than 21.
 When both the dealer and the player draw  Aces for the the first hand, It's a bust and the dealer wins.
 If both the dealer and the player have received 21 points then the dealer loses.
 If both the dealer and the player have equal scores and the value is less than 21 the dealer loses.
+The output format varies slightly from the example given in order to display more information at the end of the game.
 ## Installation
 The jdk required is java 20.
 Clone the project and import it into your Preferred IDE using the pom file.
