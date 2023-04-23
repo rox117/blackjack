@@ -20,7 +20,7 @@ public class DeckUtil {
     private static final int CORRECT_DECK_SIZE = 52;
     private static final int SUITE_BEGINNING_INDEX = 0;
     private static final int SUITE_END_INDEX = 1;
-    private static final int CARD_VALUE_BEGINNING_INDEX =1;
+    private static final int CARD_VALUE_BEGINNING_INDEX = 1;
 
     public static Deck readDeckFromFile(String filePath) throws IOException, DeckParseException {
         List<Card> cards = new ArrayList<>();
@@ -61,16 +61,19 @@ public class DeckUtil {
 
     public static void validateCard(String suit, String carValue) throws DeckParseException {
         if (Suit.valueOfLabel(suit) == null) {
-            throw new InvalidCardSuiteException(String.format("The value '%s' for card suite is incorrect.Only S,D,H,C are valid", suit));
+            throw new InvalidCardSuiteException(String.format("The value '%s' for card suite is incorrect." +
+                    "Only S,D,H,C are valid", suit));
         }
         if (CardValue.valueOfLabel(carValue) == null) {
-            throw new InvalidCardValueException(String.format("The value '%s' for card value is incorrect.Only integers between 2 and 10 inclusive or J,Q,K,A are valid", carValue));
+            throw new InvalidCardValueException(String.format("The value '%s' for card value is incorrect." +
+                    "Only integers between 2 and 10 inclusive or J,Q,K,A are valid", carValue));
         }
     }
 
     public static void validateDeckSize(List<Card> cards) throws InvalidDeckSizeException {
         if (cards.size() != CORRECT_DECK_SIZE) {
-            throw new InvalidDeckSizeException(String.format("Valid deck size is %s, deck size found is %s", CORRECT_DECK_SIZE, cards.size()));
+            throw new InvalidDeckSizeException(String.format("Valid deck size is %s, " +
+                    "deck size found is %s", CORRECT_DECK_SIZE, cards.size()));
         }
     }
 }
