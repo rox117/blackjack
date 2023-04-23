@@ -16,13 +16,21 @@ public class BlackjackApplication implements CommandLineRunner {
 	private static final int BLACK_JACK = 21;
 	private static final int PLAYER_DRAW_LIMIT = 17;
 	private static final int MINIMUM_BUST_VALUE = 22;
-	Player sam;
-	Player dealer;
-	Deck deck;
+	private Player sam;
+	private Player dealer;
+	private Deck deck;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BlackjackApplication.class, args);
 	}
+
+	public BlackjackApplication(Player player, Player dealer, Deck deck){
+		this.sam = player;
+		this.dealer = dealer;
+		this.deck = deck;
+	}
+
+	public BlackjackApplication(){}
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -54,11 +62,11 @@ public class BlackjackApplication implements CommandLineRunner {
 	}
 
 	public void evaluateWinner(){
-		if (bothHaveBlackJack()){
+		if (bothHaveBlackJack(sam, dealer)){
 			printWinner(sam, dealer);
 			return;
 		}
-		if (bothBust()){
+		if (bothBust(sam, dealer)){
 			printWinner(dealer, sam);
 			return;
 		}
@@ -88,17 +96,17 @@ public class BlackjackApplication implements CommandLineRunner {
 			printWinner(dealer, sam);
 			return;
 		}
-		if (tieLessThanBlackJack()){
+		if (tieLessThanBlackJack(sam, dealer)){
 			printWinner(sam, dealer);
 		}
 	}
 
-	public boolean bothHaveBlackJack(){
-		return hasBlackJack(sam) && hasBlackJack(dealer);
+	public boolean bothHaveBlackJack(Player player, Player dealer){
+		return hasBlackJack(player) && hasBlackJack(dealer);
 	}
 
-	public boolean bothBust(){
-		return sam.getScore() == MINIMUM_BUST_VALUE && dealer.getScore() == MINIMUM_BUST_VALUE;
+	public boolean bothBust(Player player, Player dealer){
+		return player.getScore() == MINIMUM_BUST_VALUE && dealer.getScore() == MINIMUM_BUST_VALUE;
 	}
 
 	public boolean hasBlackJack(Player player){
@@ -120,7 +128,8 @@ public class BlackjackApplication implements CommandLineRunner {
 	}
 
 	public boolean isWinnerByMajorityPoints(Player winner, Player loser){
-		return winner.getScore() > loser.getScore();
+		return winner.getScore() > loser.getScore()
+				&& winner.getScore() < BLACK_JACK;
 	}
 
 	public void printWinner(Player winner, Player loser){
@@ -128,7 +137,19 @@ public class BlackjackApplication implements CommandLineRunner {
 		System.out.println("The loser is " + loser.toString());
 	}
 
-	public boolean tieLessThanBlackJack(){
-		return sam.getScore() == dealer.getScore() && sam.getScore() < BLACK_JACK;
+	public boolean tieLessThanBlackJack(Player player, Player dealer){
+		return player.getScore() == dealer.getScore() && player.getScore() < BLACK_JACK;
+	}
+
+	public Player getSam() {
+		return sam;
+	}
+
+	public Player getDealer() {
+		return dealer;
+	}
+
+	public Deck getDeck(){
+		return deck;
 	}
 }

@@ -14,7 +14,11 @@ public class Player {
 
     public void drawCard(Card card) {
         this.hand.add(card);
-        score += card.value().value;
+        incrementScore(card);
+    }
+
+    private int incrementScore(Card card){
+        return score += card.value().value;
     }
 
     public int getScore() {

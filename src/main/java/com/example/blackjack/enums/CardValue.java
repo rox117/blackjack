@@ -1,4 +1,4 @@
-package com.example.blackjack.Enum;
+package com.example.blackjack.enums;
 
 import java.util.HashMap;
 import java.util.Map;
