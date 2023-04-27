@@ -1,4 +1,4 @@
-# blackjack
+# Blackjack
 ## Description
 a console blackjack implementation using spring and maven.
 The aim of the game is for the player to achieve the highest possible hand up to 21 in order to beat the dealer of the cards.
